@@ -1,3 +1,4 @@
+#include <limits>
 #include "fraction.h"
 /*
  * The default constructor makes an "empty"
@@ -5,7 +6,7 @@
  */
 fraction::fraction()
 {
-    std::cout<<"Fired fraction default constructor"<<std::endl;
+//    std::cout<<"Fired fraction default constructor"<<std::endl;
     num = 0;
     denom = 1;
 }
@@ -39,21 +40,23 @@ fraction::fraction(const fraction &frac)
 
 fraction::fraction(const double &other)
 {
+
     std::string wholePart, fractionPart;
     std::stringstream ss;
+//    ss << std::setprecision(9);
     ss<<other;
     getline(ss,wholePart,'.');
     getline(ss,fractionPart);
     int numDigits = fractionPart.size();
     denom = makeDenom(numDigits, allDecimalsTheSame(fractionPart));
-    num = denom * std::stoi(wholePart) + std::stoi(fractionPart);
+    num = denom * std::stoi(wholePart) + std::stoi(fractionPart) - (int)allDecimalsTheSame(fractionPart);
     reduce();
 }
 
 bool fraction::allDecimalsTheSame(const std::string &fracPart)
 {
     bool yes = true;
-    for(int i = 1; yes && i < fracPart.size(); ++i)
+    for(int i = 1; yes && i < fracPart.size()-1; ++i)
         yes = (fracPart[0] == fracPart[i]);
     return yes;
 }
@@ -63,7 +66,7 @@ int fraction::makeDenom(int digits, bool same)
     std::string result("1");
     for(int i = 0; i < digits; ++i)
         result += "0";
-    return std::stoi(result) - (int)same * 1;
+    return std::stoi(result) - (int)same;
 }
 
 /*

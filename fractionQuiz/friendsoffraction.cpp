@@ -13,29 +13,29 @@ std::istream& operator>>(std::istream& in, fraction &frac)
     char junk;
     std::stringstream ss;
     std::string possibleFraction;
-    std::cout<<"Starting operator>>"<<std::endl;
+//    std::cout<<"Starting operator>>"<<std::endl;
     if(&in == &std::cin) //This means that the program is reading from the console
     {
         if(in>>possibleFraction)
         {
-            std::cout<<"You entered: "<<possibleFraction<<std::endl;
+//            std::cout<<"You entered: "<<possibleFraction<<std::endl;
             ss<<possibleFraction;
-            std::cout<<"the first thing in the stringstream is: "<<(char)ss.peek()<<std::endl;
+//            std::cout<<"the first thing in the stringstream is: "<<(char)ss.peek()<<std::endl;
             ss>>frac;
-            std::cout<<"You got: "<<frac<<std::endl;
+//            std::cout<<"You got: "<<frac<<std::endl;
         }
     }
     else//Let's assume everything else is a file (for now)
     {
-        std::cout<<"Reading from a stream other than cin"<<std::endl;
+//        std::cout<<"Reading from a stream other than cin"<<std::endl;
         if(in>>frac.num)
         {
             if(in.peek() == '/')
                in>>junk>>frac.denom;
-            frac.reduce();
+//            frac.reduce();
         }
-        else
-            std::cout<<"Hit End of File"<<std::endl;
+//        else
+//            std::cout<<"Hit End of File"<<std::endl;
     }
     return in;
 }

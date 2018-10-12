@@ -1,5 +1,6 @@
 #include <iostream>
 #include "fraction.h"
+#include "fractionQuiz.h"
 
 using namespace std;
 
@@ -8,22 +9,8 @@ void output(fraction x, fraction y, char op);
 
 int main()
 {
-    fraction x, y;
-    getInput("Please enter your first fraction: ", x);
-    getInput("Please enter your second fraction: ", y);
-    output(x,y,'+');
-    output(x,y,'-');
-    output(x,y,'*');
-    output(x,y,'/');
-    //And now for something completely different....
-    output(3,y,'+');
-    output(3,y,'-');
-    output(3,y,'*');
-    output(3,y,'/');
-    output(x,2.8888888888,'+');
-    output(x,2.8888888888,'-');
-    output(x,2.8888888888,'*');
-    output(x,2.8888888888,'/');
+    fractionQuiz a;
+
     return 0;
 }
 

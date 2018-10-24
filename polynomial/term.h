@@ -1,17 +1,15 @@
-//
-// Created by rafab on 10/16/2018.
-//
-
-#ifndef UNTITLED17_TERM_H
-#define UNTITLED17_TERM_H
-
-
+#ifndef TERM_H
+#define TERM_H
+#include <iostream>
+#include <fstream>
 #include "fraction.h"
+#include <cmath>
 
-class term {
+class term
+{
     public:
         term(char v = 'X');
-        term(const fraction &c, const fraction &p = 0, const char &v = ' ');
+        term(const fraction &c, const fraction& p = 0);
         ~term();
         term(const term& other);
         term& operator=(const term& other);
@@ -19,7 +17,12 @@ class term {
         term& operator/=(const term& other);
         term& operator+=(const term& other);
         term& operator-=(const term& other);
-
+        fraction getPower();
+        fraction getCoeff();
+        void setTerm(const fraction &c, const fraction p = 0);
+        fraction evaluate( const fraction& other);
+        fraction operator()( const fraction& other);
+        //y = x(3/4); where y and x are terms
         friend
         term operator+(const term &x, const term &y);
 
@@ -57,13 +60,14 @@ class term {
         std::ostream& operator<<(std::ostream& out, const term& t);
 
         friend
-        std::istream& operator>>(std::istream& out, const term& t);
+        std::istream& operator>>(std::istream& out, term& t);
 
     private:
+
         fraction coeff, power;
-        char variable;
+        char variable = 'X';
+
         void copy(const term &other);
 };
 
-
-#endif //UNTITLED17_TERM_H
+#endif // TERM_H

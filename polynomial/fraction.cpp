@@ -5,7 +5,6 @@
  */
 fraction::fraction()
 {
-    std::cout<<"Fired fraction default constructor"<<std::endl;
     num = 0;
     denom = 1;
 }
@@ -15,7 +14,7 @@ fraction::fraction()
  */
 fraction::fraction(int n, int d)
 {
-    setValue(n,d);
+   setValue(n,d);
 }
 /*
  * How do you destroy a fraction?
@@ -44,6 +43,8 @@ fraction::fraction(const double &other)
     ss<<other;
     getline(ss,wholePart,'.');
     getline(ss,fractionPart);
+    if (fractionPart.empty())
+            fractionPart = "0";
     int numDigits = fractionPart.size();
     denom = makeDenom(numDigits, allDecimalsTheSame(fractionPart));
     num = denom * std::stoi(wholePart) + std::stoi(fractionPart);
@@ -129,7 +130,7 @@ void fraction::display()
 {
     std::cout<<" "<<num;
     if(denom != 1)
-        std::cout<<"/"<<denom<<" ";
+       std::cout<<"/"<<denom<<" ";
 }
 
 
@@ -144,7 +145,7 @@ void fraction::getInput()
 void fraction::reduce()
 {
     bool neg = num < 0 || denom < 0,
-            both = num < 0 && denom < 0;
+         both = num < 0 && denom < 0;
     int divisor = gcd(abs(num), abs(denom));
     num = abs(num) / divisor;
     denom = abs(denom) / divisor;
@@ -155,7 +156,7 @@ void fraction::reduce()
 
 int fraction::gcd(int p, int q)
 {
-    return !q ? p : gcd(q, p%q);  //!q is the same as asking q == 0;
+   return !q ? p : gcd(q, p%q);  //!q is the same as asking q == 0;
 }
 
 /*

@@ -41,13 +41,11 @@ polynomial operator+(const polynomial &x, const polynomial &y)
     return temp;
 }
 
-
 polynomial operator-(const polynomial &x, const polynomial &y)
 {
     polynomial temp = x + y;
     return temp;
 }
-
 
 polynomial operator*(const polynomial &x, const polynomial &y)
 {
@@ -62,7 +60,6 @@ polynomial operator*(const polynomial &x, const polynomial &y)
 
 fraction evaluate(const fraction &frac, polynomial &y)
 {
-    std::cout << "Evaluate fired" << std::endl;
     fraction temp = 0;
     for(unsigned int i = 0; i < y.poly.size(); ++i)
     {
@@ -71,18 +68,14 @@ fraction evaluate(const fraction &frac, polynomial &y)
     return temp;
 }
 
-
 //polynomial operator/(const polynomial &x, const polynomial &y)
 //{
 //    //do this with synthetic division.... hint...
 //    //Also, does polynomial need to be changed to support division??
 //}
 
-
 std::ostream& operator<<(std::ostream& out, const polynomial &other)
 {
-//    std::cout << " P << fired\n";
-
     for(unsigned int i = 0; i < other.poly.size(); ++i)
     {
         out<<other[i] <<" ";
@@ -90,10 +83,8 @@ std::ostream& operator<<(std::ostream& out, const polynomial &other)
     return out;
 }
 
-
 std::istream& operator>>(std::istream& in, polynomial &p)
 {
-//    std::cout << " P >> fired\n";
     std::stringstream aa;
     std::string possiblePoly;
     std::string possibleTerm;
@@ -106,7 +97,6 @@ std::istream& operator>>(std::istream& in, polynomial &p)
         aa>>temp;
         aa.clear();
         p.poly.push_back(temp);
-//        std::cout << " term was pushed \n";
     }
     p.sort();
     p.combineTerms();

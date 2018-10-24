@@ -108,7 +108,6 @@ fraction& fraction::operator/=(const fraction &other)
     return *this;
 }
 
-
 int fraction::getNum() //accessor function for numerator
 {
     return num;
@@ -133,14 +132,12 @@ void fraction::display()
        std::cout<<"/"<<denom<<" ";
 }
 
-
 void fraction::getInput()
 {
     char junk;
     std::cin>>num>>junk>>denom;
     reduce();
 }
-
 
 void fraction::reduce()
 {
@@ -170,4 +167,3 @@ int fraction::gcd(int p, int q)
  * If R== 0, that means Q is the GCD of the original numbers provided
  *
  */
-

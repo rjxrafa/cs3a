@@ -63,7 +63,6 @@ class term
         std::istream& operator>>(std::istream& out, term& t);
 
     private:
-
         fraction coeff, power;
         char variable = 'X';
 

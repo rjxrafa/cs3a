@@ -40,12 +40,10 @@ term operator/(const term &x, const term &y)
     return temp;
 }
 
-
 bool operator==(const term &x, const term &y)
 {
     return x.power == y.power && x.coeff == y.coeff;
 }
-
 
 bool operator!=(const term &x, const term &y)
 {
@@ -57,18 +55,15 @@ bool operator%=(const term &x, const term &y)
     return x.power == y.power;
 }
 
-
 bool operator>=(const term &x, const term &y)
 {
     return !(x < y);
 }
 
-
 bool operator<=(const term &x, const term &y)
 {
     return !(x > y);
 }
-
 
 bool operator>(const term &x, const term &y)
 {
@@ -77,7 +72,6 @@ bool operator>(const term &x, const term &y)
     else
         return x.power > y.power;
 }
-
 
 bool operator<(const term &x, const term &y)
 {
@@ -89,9 +83,6 @@ bool operator<(const term &x, const term &y)
 
 std::ostream& operator<<(std::ostream& out, const term& t)
 {
-//    std::cout << " t << was fired" << std::endl;
-
-
     out<<t.coeff<<t.variable<<'^'<<t.power;
 //    if(t.power != 0)
 //    {
@@ -142,11 +133,8 @@ std::ostream& operator<<(std::ostream& out, const term& t)
 //       return out;
 }
 
-
 std::istream& operator>>(std::istream& in, term& t)
 {
-//    std::cout << " t >> was fired" << std::endl;
-//    std::cout << t << std::endl;
     char junk;
     std::stringstream ss;
     std::string possibleTerm;
@@ -155,18 +143,15 @@ std::istream& operator>>(std::istream& in, term& t)
         if(in>>possibleTerm)
         {
             ss<<possibleTerm;
-//            std::cout << "This is the possible term: "<<possibleTerm << std::endl;
             ss>>t;
         }
     }
     else//Let's assume everything else is a file (for now)
     {
-//        std::cout << " t2 >> was fired" << std::endl;
         if(in>>t.coeff)
         {
             if(in.peek() == 'X')
                in>>t.variable>>junk>>t.power;
-//            std::cout << "This is t: "<< t << std::endl;
         }
         else
             std::cout<<"Hit End of File"<<std::endl;

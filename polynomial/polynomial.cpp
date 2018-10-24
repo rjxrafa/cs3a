@@ -52,14 +52,12 @@ polynomial& polynomial::operator-=(const polynomial &other)
 //   return *this;
 //}
 
-
 polynomial& polynomial::operator*=(const polynomial &other)
 {
         polynomial ans = *this * other;
         *this = ans;
         return *this;
 }
-
 
 fraction polynomial::operator()(const fraction &other)
 {
@@ -68,7 +66,6 @@ fraction polynomial::operator()(const fraction &other)
         result += poly[i](other);
     return result;
 }
-
 
 term polynomial::operator[](unsigned int index) const
 {

@@ -46,9 +46,7 @@ class polynomial
         friend
         std::string nthDerivative(const polynomial &other, int n);
 
-
-
-private:
+    private:
         std::vector<term> poly;
 
         void copy(const polynomial &other);

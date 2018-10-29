@@ -131,10 +131,22 @@ std::istream& operator>>(std::istream& in, term& t)
         if(in>>t.coeff)
         {
             if(in.peek() == 'X' || in.peek() == 'x')
-               in>>t.variable>>junk>>t.power;
+            {
+                in>>t.variable;
+                t.power = 1;
+            }
+
+            if (in.peek() == '^')
+                in>>junk>>t.power;
         }
         else
+        {
+//            fraction temp;
+//            in >> temp;
+//            std::cout << temp;
             std::cout<<"Hit End of File"<<std::endl;
+        }
+
     }
     return in;
 }

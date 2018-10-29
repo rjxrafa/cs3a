@@ -76,11 +76,6 @@ using namespace std;
 void introduction();
 bool checkCL(int count);
 void getInput(istream& in, char *commands[], int count);
-
-
-void let();
-void Eval();
-void print();
 void getFrac(string title, fraction &frac);
 void output(fraction x, fraction y, char op);
 void getTerm(string title, term &t);
@@ -109,24 +104,31 @@ int main(int argc, char *argv[])
 //
 //    }while(question("Do you want to do this again? "));
 //
+//    a.choice("SAVE", "test"); cout << endl;
+//    a.choice("ASDF", "test"); cout << endl;
 
-//    expression a;
+
+    expression a;
+    a.choice("print", "a");
+    cout << endl;
+    a.choice("print", "b");
+
 
 //    while(1)
 //    {
 //        cout << "input command: \n";
-//        string temp;
-//        cin >> temp;
-//        a.choice(temp);
-//        a.choice("test");
+//        string temp, arg;
+//        cin >> temp >> arg;
+//        a.choice(temp,arg);
 //    }
 
-    while (1)
-    {
-        polynomial a;
-        cin >> a;
-        cout << "\nThis is your polynomial: " << a << std::endl;
-    }
+//    while (1)
+//    {
+//        polynomial a;
+//        cin >> a;
+//        cout << "\nThis is your polynomial: " << a << std::endl;
+//    }
+
 
     return 0;
 }

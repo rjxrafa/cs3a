@@ -1,5 +1,4 @@
 #include "expression.h"
-#include "string.h"
 
 expression::expression()
 { // constructor definition
@@ -9,12 +8,9 @@ expression::expression()
         polynomial b(a);
         library[i] = b;
     }
-
-    map_StringValues["let"] = LET;
-    map_StringValues["eval"] = EVAL;
-    map_StringValues["print"] = PRINT;
-    map_StringValues["load"] = LOAD;
-    map_StringValues["save"] = SAVE;
+    initializeMap();
+    term a(3,3);
+    library[0].addTerm(a);
 }
 
 expression::~expression()
@@ -41,7 +37,8 @@ void expression::setFunction(int index)
 }
 
 void expression::choice(const std::string &input,
-                        const std::string &argument) {
+                        const std::string &argument)
+{
     std:: string temp_str;
 
     for (unsigned int i = 0; i < input.length(); ++i)
@@ -49,37 +46,63 @@ void expression::choice(const std::string &input,
         temp_str += tolower(input[i]);
     }
 
-    switch(map_StringValues[temp_str])
+    switch(commandMap[temp_str])
     {
         case LET:
-            let();
+            let(argument);
             break;
-            
+
         case EVAL:
             eval();
             break;
 
         case PRINT:
+            print(argument);
             break;
 
         case LOAD:
+            load();
             break;
 
         case SAVE:
+//            save(argument);
             break;
 
         default:
+            std::cout << "no argument found";
             exit(1); // replace with throw error
     }
 }
 
-
-void expression::save(const std::string arg) {
-//    //open object with arg name
+//void expression::save(const std::string arg)
+//{
+////    //open object with arg name
+////
+////    ostream output;
+////
+////    std::ostream << library[2];
 //
-//    ostream output;
-//
-//    std::ostream << library[2];
+//}
 
+void expression::initializeMap() {
+    commandMap["let"] = LET;
+    commandMap["eval"] = EVAL;
+    commandMap["print"] = PRINT;
+    commandMap["load"] = LOAD;
+    commandMap["save"] = SAVE;
 }
+
+void expression::let(const std::string &arg) {
+    std::stringstream temp;
+    char index;
+    temp >> index;
+    std::cin >> library[index];
+}
+
+void expression::print(const std::string &arg) {
+    // if arg is greater than one char, need to throw error
+    std::cout << arg[0] << " = " << library[toupper(arg[0])-65];
+}
+
+
 

@@ -6,13 +6,9 @@
 class expression
 {
 
-    enum UserChoice { LET,
-                      EVAL,
-                      PRINT,
-                      LOAD,
-                      SAVE };
-
-    std::map<std::string, expression::UserChoice> map_StringValues;
+    enum commands { ERROR, LET, EVAL, PRINT, LOAD, SAVE };
+    std::map<std::string, expression::commands> commandMap;
+    void initializeMap();
 
     public:
         expression();
@@ -23,12 +19,11 @@ class expression
 
     private:
         polynomial library[26];
-        void let(){std::cout << "LET EXECUTED";};
+        void let(const std::string &arg);
         void eval(){std::cout << "EVAL EXECUTED";};
-        void print(){std::cout << "PRINT EXECUTED";};
+        void print(const std::string &arg);
         void load(){std::cout << "LOAD EXECUTED";};
-        void save(const std::string arg);
-        
+        void save(const std::string &arg);
 
 };
 

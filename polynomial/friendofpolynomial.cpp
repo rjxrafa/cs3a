@@ -104,12 +104,10 @@ std::istream& operator>>(std::istream& in, polynomial &p)
 
        while(!in.eof())
        {
-           in >> temp;
+           in>>temp;
            p.addTerm(temp);
            std::cout << ": "<< temp << ": " << p <<  std::endl;
        }
-
-        std::cout << "success";
         in.clear();
         p.sort();
         p.combineTerms();

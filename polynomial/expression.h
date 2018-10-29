@@ -15,9 +15,7 @@ class expression
         expression();
         ~expression();
         void choice(const std::string &input, const std::string &argument=""); // this should access the private functions
-        void setFunction(int index);
         void clearLibrary();
-        polynomial getFunction(int index);
 
         friend
         std::ostream& operator<<(std::ostream& out, const expression &other);

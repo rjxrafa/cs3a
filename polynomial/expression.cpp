@@ -1,5 +1,4 @@
 #include "expression.h"
-#include "string.h"
 
 expression::expression()
 { // constructor definition
@@ -13,12 +12,12 @@ expression::expression()
 }
 
 expression::~expression()
-{
+{ // Sets all expressions to zero
     clearLibrary();
 }
 
 void expression::initializeMap()
-{
+{ //Creates a key-value pair
     commandMap["let"] = LET;
     commandMap["print"] = PRINT;
     commandMap["load"] = LOAD;
@@ -27,22 +26,9 @@ void expression::initializeMap()
     commandMap["display"] = DISPLAY;
 }
 
-polynomial expression::getFunction(int index)
-{
-    std::cout << library[index];
-}
-
-void expression::setFunction(int index)
-{ // set function
-    term temp(0,0);
-    polynomial a(temp);
-    std::cin >> a;
-    library[index] = a;
-}
-
 void expression::choice(const std::string &input,
                         const std::string &argument)
-{
+{ // Maps a given input to our predefined functions
     std:: string temp_str;
 
     for (unsigned int i = 0; i < input.length(); ++i)
@@ -77,15 +63,14 @@ void expression::choice(const std::string &input,
             break;
 
         default:
-            exit(1); // replace with throw error
+            exit(1); // replace with throw error?
     }
 }
 
 void expression::load(std::string arg)
-{
-    using namespace std;
-    ofstream out;
-    ifstream in;
+{ // Loads preconfigured library of expression to current working library
+    std::ofstream out;
+    std::ifstream in;
 
     char ans;
     //open with arg name, check to overwrite
@@ -94,59 +79,62 @@ void expression::load(std::string arg)
     in.open(arg);
     if((in.fail()))
     {
-        cout << "The input file does not exist" << endl;
-        exit(1);
+        std::cout << "The input file does not exist!" << std::endl;
+    }
+    else
+    {
+        in >> *this;
+        std::cout << "Load successful." << std::endl;
     }
 
-    in >> *this;
-    std::cout << "Load succesful." << std::endl;
+
 }
 
-void expression::save(std::string arg){
-    using namespace std;
-    ofstream out;
-    ifstream in;
+void expression::save(std::string arg)
+{ // Saves current expression library to file while checking for existing file
+    std::ofstream out;
+    std::ifstream in;
 
     char ans;
-    //open with arg name, check to overwrite
     if(arg.find('.') > arg.size())
-      arg += ".exp";
+        arg += ".exp";
     in.open(arg);
     in.close();
     if(in.fail())
-     out.open(arg);
+        out.open(arg);
     else
     {
-      in.clear();
-      cout<<"That file exists!!"<<endl;
-      cout<<"Do you wish to overwrite it" << endl;
-      cin >> ans;
-      if(ans == 'Y' || ans == 'y')
-          out.open(arg);
-      else
-      {
-          cout << "You chose not to overwrite" << endl;
-          return;
-      }
+        in.clear();
+        std::cout<<"That file exists!!"<< std::endl;
+        std::cout<<"Do you wish to overwrite it?" << std::endl;
+        std::cin >> ans;
+        if(ans == 'Y' || ans == 'y')
+            out.open(arg);
+        else
+        {
+            std::cout << "You chose not to overwrite." << std::endl;
+//          return;
+        }
     }
 
-    //write to file
-    out << *this;
+    out << *this; // Writes to file
     std::cout << "Save successful." <<std::endl;
 }
 
 void expression::let(const std::string &arg)
-{
+{ // Configures an given expression derived from arg to a poly, also derived
+  // from arg. E.g. "F=3X^3" etc.
     std::stringstream temp;
+    char index; // Holds first char to be used as index
+    char junk; // Will hold '='
+
     temp << arg;
-    char index;
-    char junk;
     temp >> index >> junk;
     index = toupper(index);
     term a(0,0);
     polynomial b(a);
-    library[int(index-65)] = b;
-    temp >> library[int(index-65)];
+    library[index-65] = b; // Sets the destination expression to zero before insertion
+    temp >> library[index-65];
 
     // Displays a succesful configuration
     std::cout << std::endl << index << " = "
@@ -158,7 +146,7 @@ void expression::print(const std::string &arg) {
 }
 
 void expression::clearLibrary()
-{
+{ // Clears library by setting all expressions to 0.
     for (unsigned int i = 0; i < 26; ++i)
     {
         term a(0,0);
@@ -178,7 +166,7 @@ void expression::display()
 }
 
 void expression::eval(const std::string &arg)
-{
+{ // Evaluates a given expression with the value;
     std::stringstream ss;
     fraction temp_frac;
     char index, junk;
@@ -190,8 +178,8 @@ void expression::eval(const std::string &arg)
     ss >> temp_frac;
     ss >> junk;
 
-    std::cout << index << '(' << temp_frac << ')'
-              << '=' << evaluate(temp_frac, library[int(index-65)])
+    std::cout << std::endl << index // Used for display purposes
+              << '(' << temp_frac << ')' << " = "
+              << evaluate(temp_frac, library[int(index-65)])
               << std::endl;
-
 }

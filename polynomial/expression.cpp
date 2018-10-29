@@ -132,7 +132,7 @@ void expression::save(std::string arg){
 
     //write to file
     out << *this;
-    std::cout << "Save succesful." <<std::endl;
+    std::cout << "Save successful." <<std::endl;
 }
 
 void expression::let(const std::string &arg)
@@ -148,17 +148,14 @@ void expression::let(const std::string &arg)
     library[int(index-65)] = b;
     temp >> library[int(index-65)];
 
+    // Displays a succesful configuration
+    std::cout << std::endl << index << " = "
+              << library[int(index-65)] << std::endl;
 }
 void expression::print(const std::string &arg) {
     // if arg is greater than one char, need to throw error
     std::cout << arg[0] << " = " << library[toupper(arg[0])-65] << std::endl;
 }
-
-//    //open object with arg name
-//
-//    ostream output;
-//
-//    std::ostream << library[2];
 
 void expression::clearLibrary()
 {
@@ -171,11 +168,13 @@ void expression::clearLibrary()
 }
 
 void expression::display()
-{
+{ // Display the current library of expressions
+    std::cout << std::endl;
     for(unsigned int i = 0; i < 26; ++i)
     {
-        std::cout<< (char)(i+65) << "=" << library[i] <<"\n";
+        std::cout<< (char)(i+65) << " = " << library[i] <<"\n";
     }
+    std::cout << std::endl;
 }
 
 void expression::eval(const std::string &arg)

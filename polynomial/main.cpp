@@ -71,19 +71,19 @@ void getInput(istream& in, expression& a, char *commands[], int count) //express
     {
         while(1)
         {
-            cout << "COMMAND:";
+            cout << "\nCOMMAND: ";
             getline(cin, userInput); // Get user input as one full string
             stringstream user_ss(userInput);
             string temp, arg;
 
-            user_ss >> temp; // Get first argument from
+            user_ss >> temp; // Get first argument from the stringstream
 
             //remove spaces
 
             if (temp.size() > 1)
-            {
-                a.choice(temp, arg);
-                std::cout << a << std::endl;
+            { // If temp has greater than 1 size, it is likely a command
+                user_ss >> arg; // Proceed to take another argument
+                a.choice(temp, arg); // Pass both vars into choice menu
             }
 
             if (temp.size() == 1)

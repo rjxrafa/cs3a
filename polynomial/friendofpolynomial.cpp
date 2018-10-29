@@ -80,7 +80,8 @@ std::ostream& operator<<(std::ostream& out, const polynomial &other)
                 out << "+";
         }
 
-        out<<other[i];
+        if (other[i].getCoeff() != 0)
+            out<<other[i];
     }
     return out;
 }

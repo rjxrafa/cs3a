@@ -11,25 +11,25 @@ class expression
     std::map<std::string, expression::commands> commandMap;
     void initializeMap();
 
-    public:
-        expression();
-        ~expression();
-        void choice(const std::string &input, const std::string &argument=""); // this should access the private functions
-        void clearLibrary();
+public:
+    expression();
+    ~expression();
+    void choice(const std::string &input, const std::string &argument=""); // this should access the private functions
+    void clearLibrary();
 
-        friend
-        std::ostream& operator<<(std::ostream& out, const expression &other);
-        friend
-        std::istream& operator>>(std::istream& in, expression &e);
+    friend
+    std::ostream& operator<<(std::ostream& out, const expression &other);
+    friend
+    std::istream& operator>>(std::istream& in, expression &e);
 
-    private:
-        polynomial library[26];
-        void let(const std::string &arg);
-        void eval(const std::string &arg);
-        void print(const std::string &arg);
-        void load(const std::string arg);
-        void save(const std::string arg);
-        void display();
+private:
+    polynomial library[26];
+    void let(const std::string &arg);
+    void eval(const std::string &arg);
+    void print(const std::string &arg);
+    void load(const std::string &arg);
+    void save(const std::string arg);
+    void display();
 
 };
 

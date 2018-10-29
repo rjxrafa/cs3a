@@ -67,16 +67,16 @@ void expression::choice(const std::string &input,
     }
 }
 
-void expression::load(std::string arg)
+void expression::load(const std::string &arg)
 { // Loads preconfigured library of expression to current working library
     std::ofstream out;
     std::ifstream in;
+    std::string filename = arg;
 
-    char ans;
-    //open with arg name, check to overwrite
-    if(arg.find('.') > arg.size())
-      arg += ".exp";
-    in.open(arg);
+    // Open with arg name, check to overwrite
+    if(filename.find('.') > filename.size())
+      filename+= ".exp";
+    in.open(filename);
     if((in.fail()))
     {
         std::cout << "The input file does not exist!" << std::endl;
@@ -94,14 +94,15 @@ void expression::save(std::string arg)
 { // Saves current expression library to file while checking for existing file
     std::ofstream out;
     std::ifstream in;
+    std::string filename = arg;
 
     char ans;
-    if(arg.find('.') > arg.size())
-        arg += ".exp";
-    in.open(arg);
+    if(filename.find('.') > filename.size())
+        filename += ".exp";
+    in.open(filename);
     in.close();
     if(in.fail())
-        out.open(arg);
+        out.open(filename);
     else
     {
         in.clear();
@@ -109,7 +110,7 @@ void expression::save(std::string arg)
         std::cout<<"Do you wish to overwrite it?" << std::endl;
         std::cin >> ans;
         if(ans == 'Y' || ans == 'y')
-            out.open(arg);
+            out.open(filename);
         else
         {
             std::cout << "You chose not to overwrite." << std::endl;
@@ -118,7 +119,7 @@ void expression::save(std::string arg)
     }
 
     out << *this; // Writes to file
-    std::cout << "Save successful." <<std::endl;
+    std::cout << "Save successful." << std::endl;
 }
 
 void expression::let(const std::string &arg)
@@ -136,7 +137,7 @@ void expression::let(const std::string &arg)
     library[index-65] = b; // Sets the destination expression to zero before insertion
     temp >> library[index-65];
 
-    // Displays a succesful configuration
+    // Displays a successful configuration
     std::cout << std::endl << index << " = "
               << library[int(index-65)] << std::endl;
 }
@@ -180,6 +181,6 @@ void expression::eval(const std::string &arg)
 
     std::cout << std::endl << index // Used for display purposes
               << '(' << temp_frac << ')' << " = "
-              << evaluate(temp_frac, library[int(index-65)])
+              << evaluate(temp_frac, library[index-65])
               << std::endl;
 }

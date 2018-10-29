@@ -84,7 +84,7 @@ void polynomial::sort()
     term temp;
     for(unsigned int i = 0; i < poly.size(); ++i)
         for(unsigned int j = 0; j < poly.size(); ++j)
-            if(poly[i] < poly[j])
+            if(poly[i] > poly[j])
             {
                 temp = poly[i];
                 poly[i] = poly[j];

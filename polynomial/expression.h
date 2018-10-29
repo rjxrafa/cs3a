@@ -6,24 +6,32 @@
 class expression
 {
 
-    enum commands { ERROR, LET, EVAL, PRINT, LOAD, SAVE };
+    enum commands { ERROR, LET, EVAL, PRINT, LOAD, SAVE, DISPLAY };
+
     std::map<std::string, expression::commands> commandMap;
     void initializeMap();
 
     public:
         expression();
-        ~expression();            
-        void choice(const std::string &input, const std::string &argument); // this should access the private functions
+        ~expression();
+        void choice(const std::string &input, const std::string &argument=""); // this should access the private functions
         void setFunction(int index);
+        void clearLibrary();
         polynomial getFunction(int index);
+
+        friend
+        std::ostream& operator<<(std::ostream& out, const expression &other);
+        friend
+        std::istream& operator>>(std::istream& in, expression &e);
 
     private:
         polynomial library[26];
         void let(const std::string &arg);
-        void eval(){std::cout << "EVAL EXECUTED";};
+        void eval(const std::string &arg);
         void print(const std::string &arg);
-        void load(){std::cout << "LOAD EXECUTED";};
-        void save(const std::string &arg);
+        void load(const std::string arg);
+        void save(const std::string arg);
+        void display();
 
 };
 

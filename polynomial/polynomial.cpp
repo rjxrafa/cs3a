@@ -1,8 +1,9 @@
 #include "polynomial.h"
 
 polynomial::polynomial()
-{
-
+{ // Creates a polynomial with 0X^0
+    term a;
+    poly.push_back(a);
 }
 
 polynomial::~polynomial()

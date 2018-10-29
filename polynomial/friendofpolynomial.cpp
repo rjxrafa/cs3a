@@ -85,7 +85,6 @@ std::ostream& operator<<(std::ostream& out, const polynomial &other)
     return out;
 }
 
-
 std::istream& operator>>(std::istream& in, polynomial &p)
 {
     std::string possiblePoly;
@@ -102,12 +101,11 @@ std::istream& operator>>(std::istream& in, polynomial &p)
     {
         term temp;
 
-       while(!in.eof())
-       {
-           in>>temp;
-           p.addTerm(temp);
-           std::cout << ": "<< temp << ": " << p <<  std::endl;
-       }
+        while(!in.eof())
+        {
+            in >> temp;
+            p.addTerm(temp);
+        }
         in.clear();
         p.sort();
         p.combineTerms();

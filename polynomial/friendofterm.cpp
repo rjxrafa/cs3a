@@ -89,8 +89,6 @@ bool operator<(const term &x, const term &y)
 
 std::ostream& operator<<(std::ostream& out, const term& t)
 {
-//    out<<t.coeff<<t.variable<<'^'<<t.power;
-
     if (t.coeff != 0)
     {
         if (t.coeff != 1)
@@ -104,7 +102,8 @@ std::ostream& operator<<(std::ostream& out, const term& t)
                 out << '^' << t.power;
         }
     }
-    else {
+    else
+    {
         out << '0';
     }
 
@@ -131,22 +130,10 @@ std::istream& operator>>(std::istream& in, term& t)
         if(in>>t.coeff)
         {
             if(in.peek() == 'X' || in.peek() == 'x')
-            {
-                in>>t.variable;
-                t.power = 1;
-            }
-
-            if (in.peek() == '^')
-                in>>junk>>t.power;
+               in>>t.variable>>junk>>t.power;
         }
         else
-        {
-//            fraction temp;
-//            in >> temp;
-//            std::cout << temp;
             std::cout<<"Hit End of File"<<std::endl;
-        }
-
     }
     return in;
 }

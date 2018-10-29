@@ -1,35 +1,18 @@
 #include "fraction.h"
-/*
- * The default constructor makes an "empty"
- * object, and is required ALL the time!
- */
+
 fraction::fraction()
 {
     num = 0;
     denom = 1;
 }
-/*
- * Two item constructor that will pass a numerator
- * and a denominator to the new fraction
- */
 fraction::fraction(int n, int d)
 {
    setValue(n,d);
 }
-/*
- * How do you destroy a fraction?
- * By the destructor!
- */
 fraction::~fraction()
 {
     num = denom = 0;
 }
-/*
- * The copy constructor is fired whenever
- * 1. You pass by value
- * 2. You use a return statement that
- *    does not got back to a reference
- */
 fraction::fraction(const fraction &frac)
 {
     num = frac.num;
@@ -67,13 +50,6 @@ int fraction::makeDenom(int digits, bool same)
     return std::stoi(result) - (int)same * 1;
 }
 
-/*
- * The assignment operator needs to be
- * returned by reference so that you can
- * "chain" operators.
- * e.g.
- * x = y = z;
- */
 fraction& fraction::operator=(const fraction &frac)
 {
     if(this != &frac)
@@ -108,17 +84,18 @@ fraction& fraction::operator/=(const fraction &other)
     return *this;
 }
 
-int fraction::getNum() //accessor function for numerator
+
+int fraction::getNum()
 {
     return num;
 }
 
-int fraction::getDenom()//accessor function for denominator
+int fraction::getDenom()
 {
     return denom;
 }
 
-void fraction::setValue(int n, int d) //mutator function
+void fraction::setValue(int n, int d)
 {
     num = n;
     denom = d;
@@ -132,12 +109,14 @@ void fraction::display()
        std::cout<<"/"<<denom<<" ";
 }
 
+
 void fraction::getInput()
 {
     char junk;
     std::cin>>num>>junk>>denom;
     reduce();
 }
+
 
 void fraction::reduce()
 {
@@ -146,24 +125,13 @@ void fraction::reduce()
     int divisor = gcd(abs(num), abs(denom));
     num = abs(num) / divisor;
     denom = abs(denom) / divisor;
-    if(!both) //Asking is both == false
+    if(!both)
         if(neg)
             num *= -1;
 }
 
 int fraction::gcd(int p, int q)
 {
-   return !q ? p : gcd(q, p%q);  //!q is the same as asking q == 0;
+   return !q ? p : gcd(q, p%q);
 }
 
-/*
- *  Remainder Theorem
- *
- *  P = nQ + R;
- *
- * 36 = (1)(24) + 12  Question, is 12 == 0?
- * 24 = (2)(12) + 0   If no, move Q into P, and R into Q and continue
- *                    until R == 0;
- * If R== 0, that means Q is the GCD of the original numbers provided
- *
- */

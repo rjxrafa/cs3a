@@ -41,11 +41,13 @@ polynomial operator+(const polynomial &x, const polynomial &y)
     return temp;
 }
 
+
 polynomial operator-(const polynomial &x, const polynomial &y)
 {
     polynomial temp = x + y;
     return temp;
 }
+
 
 polynomial operator*(const polynomial &x, const polynomial &y)
 {
@@ -68,37 +70,51 @@ fraction evaluate(const fraction &frac, polynomial &y)
     return temp;
 }
 
-//polynomial operator/(const polynomial &x, const polynomial &y)
-//{
-//    //do this with synthetic division.... hint...
-//    //Also, does polynomial need to be changed to support division??
-//}
-
 std::ostream& operator<<(std::ostream& out, const polynomial &other)
 {
     for(unsigned int i = 0; i < other.poly.size(); ++i)
     {
-        out<<other[i] <<" ";
+        if (i > 0) // need logic for negative polynomial
+        {
+            if (other[i].getCoeff() > 0)
+                out << "+";
+        }
+
+        out<<other[i];
     }
     return out;
 }
 
+
 std::istream& operator>>(std::istream& in, polynomial &p)
 {
-    std::stringstream aa;
     std::string possiblePoly;
-    std::string possibleTerm;
-    term temp;
-    getline(in, possiblePoly);
-    std::stringstream ss(possiblePoly);
-    while(ss>>possibleTerm)
+    std::stringstream ss;
+    if(&in == &std::cin)
     {
-        aa<<possibleTerm;
-        aa>>temp;
-        aa.clear();
-        p.poly.push_back(temp);
+        if(in >> possiblePoly)
+        {
+            ss << possiblePoly;
+            ss >> p;
+        }
     }
-    p.sort();
-    p.combineTerms();
+    else
+    {
+        term temp;
+
+       while(!in.eof())
+       {
+           in >> temp;
+           p.addTerm(temp);
+           std::cout << ": "<< temp << ": " << p <<  std::endl;
+       }
+
+        std::cout << "success";
+        in.clear();
+        p.sort();
+        p.combineTerms();
+    }
+
     return in;
+
 }

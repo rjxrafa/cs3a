@@ -45,19 +45,13 @@ polynomial& polynomial::operator-=(const polynomial &other)
 
 }
 
-//polynomial& polynomial::operator/=(const polynomial &other)
-//{
-//    polynomial ans = *this / other;
-//   *this = ans;
-//   return *this;
-//}
-
 polynomial& polynomial::operator*=(const polynomial &other)
 {
         polynomial ans = *this * other;
         *this = ans;
         return *this;
 }
+
 
 fraction polynomial::operator()(const fraction &other)
 {
@@ -67,18 +61,12 @@ fraction polynomial::operator()(const fraction &other)
     return result;
 }
 
+
 term polynomial::operator[](unsigned int index) const
 {
     return poly[index];
 }
 
-/*
- * Suppose that there is a polynomial named f.
- * then the operator below will allow:
- * f[3] = term(3,2);
- * Meaning, we can index the polynomial like and array and
- * assign new values to each term.
- */
 term& polynomial::operator[](unsigned int index)
 {
     return poly[index];
@@ -116,12 +104,18 @@ void polynomial::combineTerms()
     }
 }
 
-/*
- *   *(x + 2) is the same as x[2] in an array!!!
- *
- *    for(vector<term>::iterator i = poly.begin(); i != poly.end(); ++i
- *           cout<<*i<<endl;
- *
- *    for(vector<term>::iterator i = poly.rbegin(); i != poly.rend(); --i
- *           cout<<*i<<endl;
- */
+void polynomial::addTerm(const term &t) {
+    term temp = t;
+    bool matchFound = false;
+    for (unsigned int i = 0; i < poly.size(); ++i)
+    {
+        if (temp.getPower() == poly[i].getPower())
+        {
+            poly[i]+=temp;
+            matchFound = true;
+        }
+    }
+
+    if (!matchFound)
+        poly.push_back(temp);
+}

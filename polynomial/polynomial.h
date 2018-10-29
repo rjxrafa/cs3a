@@ -1,5 +1,5 @@
-#ifndef POLYNOMIAL_H
-#define POLYNOMIAL_H
+#ifndef polynomial_H
+#define polynomial_H
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -13,6 +13,7 @@ class polynomial
         ~polynomial();
         polynomial(const term &other);
         polynomial(const polynomial &other);
+        void addTerm(const term &t);
         polynomial& operator=(const polynomial &other);
         polynomial& operator+=(const polynomial &other);
         polynomial& operator-=(const polynomial &other);
@@ -46,7 +47,9 @@ class polynomial
         friend
         std::string nthDerivative(const polynomial &other, int n);
 
-    private:
+
+
+private:
         std::vector<term> poly;
 
         void copy(const polynomial &other);
@@ -54,4 +57,4 @@ class polynomial
         void combineTerms();
 };
 
-#endif // POLYNOMIAL_H
+#endif // polynomial_H

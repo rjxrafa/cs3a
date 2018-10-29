@@ -40,10 +40,12 @@ term operator/(const term &x, const term &y)
     return temp;
 }
 
+
 bool operator==(const term &x, const term &y)
 {
     return x.power == y.power && x.coeff == y.coeff;
 }
+
 
 bool operator!=(const term &x, const term &y)
 {
@@ -55,15 +57,18 @@ bool operator%=(const term &x, const term &y)
     return x.power == y.power;
 }
 
+
 bool operator>=(const term &x, const term &y)
 {
     return !(x < y);
 }
 
+
 bool operator<=(const term &x, const term &y)
 {
     return !(x > y);
 }
+
 
 bool operator>(const term &x, const term &y)
 {
@@ -72,6 +77,7 @@ bool operator>(const term &x, const term &y)
     else
         return x.power > y.power;
 }
+
 
 bool operator<(const term &x, const term &y)
 {
@@ -83,62 +89,36 @@ bool operator<(const term &x, const term &y)
 
 std::ostream& operator<<(std::ostream& out, const term& t)
 {
-    out<<t.coeff<<t.variable<<'^'<<t.power;
-//    if(t.power != 0)
-//    {
-//        if(t.coeff == 0)
-//        {
-//            out << t.coeff;
-//        }
-//        else if(t.coeff == 1)
-//        {
-//            out << t.variable;
-//            if(t.power != 1)
-//            {
-//                out<< '^' << t.power;
-//            }
-//        }
-//        else if(t.coeff != 0 || t.coeff != 1)
-//        {
-//            out << t.coeff << t.variable << '^' << t.power;
-//        }
-//    }
-//    else
-//    {
-//        out << t.coeff;
-//    }
-    return out;
+//    out<<t.coeff<<t.variable<<'^'<<t.power;
 
-//    if (t.coeff == 0)
-//           out << t.coeff;
-//       else
-//       {
-//           if (t.coeff != 1)
-//           { //print out only the variable
-//               out << t.coeff;
-//               if (t.power != 0)
-//               { // print out variable only if power is not 0
-//                   out<< t.variable;
-//                   if(t.power != 1)
-//                   {   // print out power only if it is not 1
-//                       out << '^' << t.power;
-//                   }
-//               }
-//           }
-//           else
-//           { // just print out 1
-//               out << t.coeff;
-//           }
-//       }
-//       return out;
+    if (t.coeff != 0)
+    {
+        if (t.coeff != 1)
+        {
+            out << t.coeff;
+        }
+        if (t.power != 0)
+        {
+            out << t.variable;
+            if (t.power != 1)
+                out << '^' << t.power;
+        }
+    }
+    else {
+        out << '0';
+    }
+
+    return out;
 }
+
 
 std::istream& operator>>(std::istream& in, term& t)
 {
+
     char junk;
     std::stringstream ss;
     std::string possibleTerm;
-    if(&in == &std::cin) //This means that the program is reading from the console
+    if(&in == &std::cin)
     {
         if(in>>possibleTerm)
         {
@@ -146,11 +126,11 @@ std::istream& operator>>(std::istream& in, term& t)
             ss>>t;
         }
     }
-    else//Let's assume everything else is a file (for now)
+    else
     {
         if(in>>t.coeff)
         {
-            if(in.peek() == 'X')
+            if(in.peek() == 'X' || in.peek() == 'x')
                in>>t.variable>>junk>>t.power;
         }
         else

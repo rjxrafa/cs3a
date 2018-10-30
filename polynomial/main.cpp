@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <fstream>
 #include <sstream>
 #include "fraction.h"
@@ -10,14 +10,18 @@ using namespace std;
 
 void introduction();
 bool checkCL(int count);
-void getInput(istream& in, expression&a, char *commands[], int count);
+void getInput(istream& in, expression&a, char *commands[],
+              int count, bool record = false, bool execute = false);
 bool question(string title);
 void introduction();
+void recordFile(std::string filename, string userInput);
+void executeFile(string filename, string &userInput, int&count);
 
 int main(int argc, char *argv[])
 {
     introduction();
     bool CL = checkCL(argc);
+    vector<string> commandOutput;
 
     do
     {
@@ -27,10 +31,9 @@ int main(int argc, char *argv[])
         if(CL)
             getInput(in, a, argv, argc); //if parameters in command line, we're reading from a file
         else
-            getInput(cin, a, argv, argc); //read from terminal
+            getInput(cin, a, argv, argc);//read straight from the terminal
 
     } while(question("Do you want to do this again? "));
-
     return 0;
 }
 
@@ -60,86 +63,95 @@ bool checkCL(int count)
     return false;
 }
 
-void getInput(istream& in, expression& a, char *commands[], int count) //expression will be in here as well
+void getInput(istream& in, expression& a, char *commands[], int count,
+              const bool record, const bool execute)
 {
-    ifstream file;
-    stringstream ss;
-    string line, filename, EXorRE, userInput;
-    polynomial input;
+    string userInput;
 
+    int count2=0;
     if(&in == &cin) //read from terminal, no parameters in command line
     {
         while(1)
         {
             cout << "\nCOMMAND: ";
-            getline(cin, userInput); // Get user input as one full string
+            if(execute)
+            {
+                //open file and read from it, input line into userInput, repeat this until we reach the end.
+                executeFile(commands[2], userInput, count2);
+            }
+            else
+                getline(cin, userInput); // Get user input as one full string
             stringstream user_ss(userInput);
-            string temp, arg;
+            string arg;
+//            commandOutput.push
 
-            user_ss >> temp; // Get first argument from the stringstream
+            if(record)
+            {
+                recordFile(commands[2], userInput);
+            }
 
             //remove spaces
 
-            if (temp.size() > 1)
-            { // If temp has greater than 1 size, it is likely a command
-                user_ss >> arg; // Proceed to take another argument
-                a.choice(temp, arg); // Pass both vars into choice menu
-            }
-
-            if (temp.size() == 1)
+            if (userInput.size() == 0)
             {
-                char a, b, c, op;
+                cout << "See ya!" << endl;
+                exit(1);
+            }
+            if (userInput[1]=='=')
+            {
+                cout <<"op = fired" << endl;
+                char index, b, c, op;
                 int deriv_count(0);
 
-                a = temp[0]; // takes initial argument as a
-                user_ss >> op; // takes '=' as junk
-                user_ss >> b; // takes 2nd expression as b
+                index = userInput[0]; // takes initial argument as a
+                b = userInput[2]; // takes 2nd expression as b
 
-
-                if (user_ss.peek() == '\'')
+                if (userInput[3] == '\'')
                 {
-                    while (user_ss.peek() == '\'')
+                    for(unsigned int i = 3; i < userInput.length() && userInput[i] == '\''; ++i)
                     {
                         deriv_count++;
-                        user_ss >> op;
-
                     }
-                    cout <<deriv_count<< endl;
+
+                    a.nthDerivative(index-65, b-65, deriv_count);
                 }
                 else
                 {
-                    user_ss >> op;
-                    user_ss >> c;
-                    cout <<  "a: " << a
-                          << "\nb: " << b
-                         << "\nop: " << op
-                         << "\nc: " << c << endl;
+                    c=userInput[4];
+
+                    switch (userInput[3])
+                    {
+                    case '+':
+                        a.add(index-65, b-65, c-65);
+                        break;
+                    case '-':
+                        a.subtract(index-65, b-65, c-65);
+                        break;
+                    case '*':
+                        a.multiply(index-65, b-65, c-65);
+                        break;
+                    case '/':
+                        break;
+                    default:
+                        cout << "Error " << endl;
+                        exit(1);
+                    }
                 }
             }
-//
-//            if (temp.size() == 0)
-//            {
-//                cout << "See ya!" << endl;
-//                exit(1);
-//            }
-
-
-
-
-            // If
-
-            // If
-//            cout << userInput;
-
-//            string temp, arg;
-//            cin >> temp;
-//            cin >> arg;
+            else
+            {
+                user_ss >> userInput;
+                // If temp has greater than 1 size, it is likely a command
+                user_ss >> arg; // Proceed to take another argument
+                a.choice(userInput, arg); // Pass both vars into choice menuF
+            }
 
         }
-
     }
     else
     {
+        string filename;
+
         //one parameter after the name of the program
         if(count == 2)
         {
@@ -150,33 +162,43 @@ void getInput(istream& in, expression& a, char *commands[], int count) //express
 
             if(filename == "/h" || filename == "/?")
             {
-                cout << "It seems that you need help, you must include the name of the file that you wish to load" << endl;
+                cout << "It seems that you need help, "
+                        "you must include the name of the file that you wish to load" << endl;
                 exit(1);
             }
 
-            a.choice("save", filename);
+            a.choice("load", filename);
 
+            getInput(cin, a, commands, count, false, false);
 
         }
         else if(count == 3)
         {
+            ifstream file;
+            string EXorRE;
+
             cout <<"There are two parameters in the command line" << endl;
 
             //first argument is a command, either execute or record
             EXorRE = commands[1];
 
-            //this is the name of a script file, which is composed of commands
-            filename = commands[2];
+            for (unsigned int i = 0; i < EXorRE.length(); ++i) // converts to uppercase
+                EXorRE[i] = toupper(EXorRE[i]);
 
-            //add .spt to file name if not found
-            if(filename.find('.') > filename.size())
-                filename += ".spt";
-            file.open(filename);
-            if((in.fail()))
+
+            filename = commands[2];
+            if (EXorRE == "EXECUTE")
             {
-                cout << "The input file does not exist" << endl;
-                exit(1);
+                cout << "Executing File" << endl;
+                getInput(cin, a, commands, count, false, true);
+
             }
+            else if (EXorRE == "RECORD")
+            {
+                cout << "Recording File" << endl;
+                getInput(cin, a, commands, count, true, false);
+            }
+
         }
     }
 }
@@ -201,8 +223,42 @@ bool question(string title)
     return toupper(line[0]) == 'Y';
 }
 
+void recordFile(std::string filename, string userInput)
+{ // Saves current expression library to file while checking for existing file
+    cout << "Write Fired" << endl;
+    ofstream out;
+    std::ifstream in;
+
+    if(filename.find('.') > filename.size())
+        filename += ".spt";
+
+    out.open(filename,ios_base::app);
+
+    out << userInput << endl;
+
+    out.close();
+}
+
+void executeFile(string filename, string &userInput, int &count)
+{
+    //open input file, keep grabbing a line from the file
+    ifstream in;
+    string line;
+    if(filename.find('.') > filename.size())
+        filename += ".spt";
+
+    in.open(filename);
+
+    for(int i = 0; i < count; i++)
+    {
+        getline(in, line);
+    }
+    getline(in, userInput);
+    count++;
+    in.close();
+
+}
+
 /* Sample Program
-
-
 
 */

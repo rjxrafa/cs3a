@@ -91,16 +91,21 @@ std::ostream& operator<<(std::ostream& out, const term& t)
 {
     if (t.coeff != 0)
     {
-        if (t.coeff != 1)
+        if (t.coeff != 1) // prints out coeff
         {
             out << t.coeff;
         }
+
+        if (t.coeff == 1 && t.power == 0) // '1X^0 = 1' prints out 1 by itself
+            out << t.coeff;
+
         if (t.power != 0)
         {
             out << t.variable;
             if (t.power != 1)
                 out << '^' << t.power;
         }
+
     }
     else
     {
@@ -127,12 +132,22 @@ std::istream& operator>>(std::istream& in, term& t)
     }
     else
     {
-        if(in>>t.coeff)
+        bool cinflag = true;
+
+        if (in>>t.coeff)
+            cinflag = false; // this sets a flag for variable to know if there is a coefficient
+
+        t.power = 0;
+
+        if(isalpha(in.peek())) //only execute when variable exists
         {
-            if(in.peek() == 'X' || in.peek() == 'x')
-                in>>t.variable>>junk>>t.power;
+            in>>t.variable;
+            t.coeff+=cinflag;
+            t.power = 1;
         }
-//        else
+
+        if(in.peek() == '^') // only execute when carat exists
+            in>>junk>>t.power;
 //            std::cout<<"Hit End of File"<<std::endl;
     }
     return in;

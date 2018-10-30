@@ -67,6 +67,27 @@ void expression::choice(const std::string &input,
     }
 }
 
+void expression::nthDerivative(const int index, const int source, int n)
+{
+    while (n > 0){
+        library[index] = firstDerivative(library[source]);
+        n--;
+    }
+}
+
+void expression::add(const int index, const int arg1, const int arg2)
+{
+    library[index] = library[arg1] + library[arg2];
+}
+void expression::subtract(const int index, const int arg1, const int arg2)
+{
+    library[index] = library[arg1] - library[arg2];
+}
+void expression::multiply(const int index, const int arg1, const int arg2)
+{
+    library[index] = library[arg1] * library[arg2];
+}
+
 void expression::load(const std::string &arg)
 { // Loads preconfigured library of expression to current working library
     std::ofstream out;
@@ -184,3 +205,11 @@ void expression::eval(const std::string &arg)
               << evaluate(temp_frac, library[index-65])
               << std::endl;
 }
+
+
+void execute(const std::string &userInput)
+{
+
+}
+
+//void record(const std)

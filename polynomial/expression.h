@@ -16,6 +16,13 @@ public:
     ~expression();
     void choice(const std::string &input, const std::string &argument=""); // this should access the private functions
     void clearLibrary();
+    void nthDerivative(const int index, const int source, int n);
+    void add(const int index, const int arg1, const int arg2);
+    void subtract(const int index, const int arg1, const int arg2);
+    void multiply(const int index, const int arg1, const int arg2);
+//    void divide(const int index, const int source);
+    void execute(const std::string &userInput);
+    void record(const std::string &filename);
 
     friend
     std::ostream& operator<<(std::ostream& out, const expression &other);
@@ -30,6 +37,7 @@ private:
     void load(const std::string &arg);
     void save(const std::string arg);
     void display();
+
 
 };
 

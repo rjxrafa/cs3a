@@ -224,3 +224,11 @@ void expression::eval(const std::string &arg)
               << evaluate(temp_frac, library[index-65])
               << std::endl;
 }
+
+
+void execute(const std::string &userInput)
+{
+
+}
+
+//void record(const std)

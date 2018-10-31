@@ -224,6 +224,10 @@ void getInput(istream& in, expression& a, char *commands[], int count,
 
             //second argument is a script file
             filename = commands[2];
+            if (EXorRE == "EXECUTE")
+            {
+                cout << "Executing File" << endl;
+                getInput(cin, a, commands, count, false, true);
 
             if (EXorRE == "EXECUTE")
             {

@@ -21,24 +21,17 @@ std::istream& operator>>(std::istream& in, expression &e)
     e.clearLibrary();
     for(unsigned int i = 0; i < 26; ++i)
     {
+        //grabs a line
         getline(in, line);
-//        std::cout<<line<<std::endl;
+        //puts in stream
         ss << line;
-
+        //grabs index
         ss >> index;
         index = toupper(index);
-//        std::cout << index << std::endl;
+        //throws away equals
         ss >> junk;
-//        std::cout << junk << std::endl;
-        ss >> e.library[int(index-65)]; //
-//        std::cout << temp << std::endl;
-
-//        e.library[int(index-65)] = poly_temp;
-
-//        std::stringstream asdf;
-//        asdf << random;
-//        asdf >> e.library[13];
-
+        //saves expresion as element of library(holds polynomials)
+        ss >> e.library[int(index-65)];
         ss.clear();
 
     }

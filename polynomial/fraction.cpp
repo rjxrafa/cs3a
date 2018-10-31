@@ -36,6 +36,8 @@ fraction::fraction(const double &other)
 
 bool fraction::allDecimalsTheSame(const std::string &fracPart)
 {
+    if(fracPart.size()<3)
+            return false;//credit to yuner
     bool yes = true;
     for(int i = 1; yes && i < fracPart.size(); ++i)
         yes = (fracPart[0] == fracPart[i]);

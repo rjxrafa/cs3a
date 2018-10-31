@@ -26,6 +26,7 @@ void expression::initializeMap()
     commandMap["display"] = DISPLAY;
 }
 
+
 void expression::choice(const std::string &input,
                         const std::string &argument)
 { // Maps a given input to our predefined functions
@@ -67,8 +68,40 @@ void expression::choice(const std::string &input,
     }
 }
 
+void expression::nthDerivative(const int index, const int source, int n)
+{
+    polynomial temp = library[source];
+    while (n > 0){
+        temp = firstDerivative(temp);
+        library[index] = temp;
+        n--;
+    }
+    std::cout << std::endl << char(index+65) << "=" << library[index] << std::endl;
+}
+
+void expression::add(const int index, const int arg1, const int arg2)
+{
+    library[index] = library[arg1] + library[arg2];
+    std::cout << std::endl << char(index+65) << "=" << library[index] << std::endl;
+}
+void expression::subtract(const int index, const int arg1, const int arg2)
+{
+    library[index] = library[arg1] - library[arg2];
+    std::cout << std::endl << char(index+65) << "=" << library[index] << std::endl;
+}
+void expression::multiply(const int index, const int arg1, const int arg2)
+{
+    polynomial temp1=library[arg1], temp2=library[arg2];
+    temp1.nukezeros();
+    temp2.nukezeros();
+
+    library[index] = temp1 * temp2;
+    std::cout << std::endl << char(index+65) << "=" << library[index] << std::endl;
+}
+
+// Loads preconfigured library of expression to current working library
 void expression::load(const std::string &arg)
-{ // Loads preconfigured library of expression to current working library
+{
     std::ofstream out;
     std::ifstream in;
     std::string filename = arg;
@@ -84,7 +117,7 @@ void expression::load(const std::string &arg)
     else
     {
         in >> *this;
-        std::cout << "Load successful." << std::endl;
+        std::cout << "The file \"" << filename << "\" was loaded! \n";
     }
 
 
@@ -109,12 +142,19 @@ void expression::save(std::string arg)
         std::cout<<"That file exists!!"<< std::endl;
         std::cout<<"Do you wish to overwrite it?" << std::endl;
         std::cin >> ans;
+
+        char symbol;
+        do
+        {
+            std::cin.get(symbol);
+        } while (symbol != '\n');
+
         if(ans == 'Y' || ans == 'y')
             out.open(filename);
         else
         {
             std::cout << "You chose not to overwrite." << std::endl;
-//          return;
+            return;
         }
     }
 

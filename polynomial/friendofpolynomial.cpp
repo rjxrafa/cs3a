@@ -44,14 +44,20 @@ polynomial operator+(const polynomial &x, const polynomial &y)
 
 polynomial operator-(const polynomial &x, const polynomial &y)
 {
-    polynomial temp = x + y;
+    polynomial _y(y);
+    for(unsigned int i = 0; i < _y.poly.size(); ++i)
+    {
+        _y.poly[i].setTerm(fraction(0)-_y.poly[i].getCoeff(),
+                           _y.poly[i].getPower());
+    }
+    polynomial temp = x + _y;
     return temp;
 }
-
 
 polynomial operator*(const polynomial &x, const polynomial &y)
 {
     polynomial temp;
+
     for(unsigned int i = 0; i < x.poly.size(); ++i)
         for(unsigned int j = 0; j < y.poly.size(); ++j)
             temp.poly.push_back(x[i] * y[j]);

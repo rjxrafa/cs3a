@@ -22,6 +22,7 @@ class polynomial
         fraction operator()(const fraction &other);
         term operator[](unsigned int index) const;
         term& operator[](unsigned int index);
+        void nukezeros();
 
         friend
         polynomial firstDerivative(const polynomial &other);

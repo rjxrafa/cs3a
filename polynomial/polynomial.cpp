@@ -116,7 +116,14 @@ void polynomial::addTerm(const term &t) {
             matchFound = true;
         }
     }
-
     if (!matchFound)
         poly.push_back(temp);
+}
+void polynomial::nukezeros() {
+    for (unsigned int i =0; i < poly.size(); ++i)
+        if (poly[i].getPower() == 0 &&
+            poly[i].getCoeff() == 0)
+        {
+            poly.erase(poly.begin()+i);
+        }
 }

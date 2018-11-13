@@ -33,3 +33,4 @@
 
 # IDEs
 .vscode/settings.json
+.DS_Store

@@ -1,34 +1,46 @@
 #include <iostream>
 #include "smartarray.h"
-#include <ctime>
-#include <cstdlib>
-#include <string>
 
 using namespace std;
 
 bool getInput(int &size);
+
 void perform(int size);
-void generate(smartArray &list);
-void display(string title, const smartArray &list);
+
+template<typename D>
+void generate(smartArray<D> &list);
+
+template<typename D>
+void display(string title, const smartArray<D> &list);
 
 int main()
 {
     int size;
     srand(time(nullptr));
 
+    smartArray<char> charArr[5];
+    smartArray<int> intArr[5];
+    smartArray<double> doubleArr[5];
+    smartArray<string> stringArr[5];
+
+
+    charArr[1] = 'a';
+
+
+
     try
     {
-        while(getInput(size))
-            perform(size);
+//        while(getInput(size))
+//            perform(size);
     }
-    catch (smartArray_ERRORS e)
+    catch (MY_ARRAY_ERRORS e)
     {
         switch(e)
         {
             case OUT_OF_BOUNDS_LOW  : cout<<"Index entered was below 0"<<endl;
-                                      break;
+                break;
             case OUT_OF_BOUNDS_HIGH : cout<<"Index entered was equal to or greater than the size of the array"<<endl;
-                                      break;
+                break;
             case BAD_SIZE           : cout<<"A bad size was give for the array."<<endl;
         }
     }
@@ -57,30 +69,31 @@ bool getInput(int &size)
     return true;
 }
 
-void perform(int size)
-{
-    smartArray list(size);
-    generate(list);
-    display("Unsorted:", list);
-    list.sort();
-    display("Sorted:", list);
-}
+//template <typename D>
+//void perform(int size)
+//{
+//    smartArray<D> list(size);
+//    generate(list);
+//    display("Unsorted:", list);
+//    list.sort();
+//    display("Sorted:", list);
+//}
 
 
-void generate(smartArray &list)
-{
-    for(int i = 0; i < list.size(); ++i)
-        list[i] = rand()%1000;
-}
+//void generate(smartArray &list)
+//{
+//    for(int i = 0; i < list.size(); ++i)
+//        list[i] = rand()%1000;
+//}
 
-void display(string title, const smartArray &list)
-{
-    cout<<endl<<title<<":"<<endl;
-    for(int i = 0; i < list.size(); ++i)
-    {
-        if(i%6 == 0)
-            cout<<endl;
-        cout<<setw(5)<<list[i];
-    }
-    cout<<endl;
-}
+//void display(string title, const smartArray &list)
+//{
+//    cout<<endl<<title<<":"<<endl;
+//    for(int i = 0; i < list.size(); ++i)
+//    {
+//        if(i%6 == 0)
+//            cout<<endl;
+//        cout<<setw(5)<<list[i];
+//    }
+//    cout<<endl;
+//}

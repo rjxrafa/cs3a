@@ -4,9 +4,11 @@ project(cs3a)
 set (CMAKE_CXX_STANDARD 11)
 
 file(GLOB SOURCES *.cpp
-                  fraction_quiz/*.cpp)
+                  fraction_quiz/*.cpp
+                  copy/*.cpp)
 
-file(GLOB INCLUDE fraction_quiz/*.h)
+file(GLOB INCLUDE fraction_quiz/*.h
+                  copy/*.h)
 
 if(MINGW)
     set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} -static-libstdc++)

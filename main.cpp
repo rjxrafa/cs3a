@@ -9,6 +9,7 @@
 #include <iostream>
 #include "stack/driver.h"
 #include "fraction_quiz/driver.h"
+#include "copy/driver.h"
 
 int main(int argc, char ** argv) {
 
@@ -17,9 +18,10 @@ int main(int argc, char ** argv) {
 
   bool menu = true;
   while (menu) {
-    std::cout << "Choose a program to run (Press enter to exit): \n\n"
+    std::cout << "\nChoose a program to run (Enter 0 to exit): \n\n"
               << "(1) Palindrome Checker (w/ Stacks)\n"
-              << "(2) Fraction Quiz (w/ Fraction class)\n";
+              << "(2) Fraction Quiz (w/ Fraction class)\n"
+              << "(3) File Copier (w/ Command line arguments)\n";
 
     int user_choice = getchar();
     fflush(stdin);
@@ -31,7 +33,10 @@ int main(int argc, char ** argv) {
       case '2':
         PlayFractionQuiz();
         break;
-      case 10:
+      case '3':
+        CopyDriver(argc, argv);
+        break;
+      case '0':
         menu = false;
         break;
       default:

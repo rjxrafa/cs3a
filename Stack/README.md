@@ -1,4 +1,4 @@
-#Palindromes with Stacks
+# Palindromes with Stacks
 This program is an implementation of the Stack data structure 
 using dynamically allocated arrays.
 

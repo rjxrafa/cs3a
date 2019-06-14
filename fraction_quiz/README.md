@@ -1,8 +1,6 @@
-Correct the fraction class and program done in class. (This is an easy assignment!)
+# Fraction Quiz
 
-Make sure that you have all of the friends that you need for the class!
-
-Write a program that will generate a "fraction quiz" for elementary school children. 
+This program will generate a "fraction quiz" for elementary school children. 
 
 First, the program will ask for the child's name. Then it will ask for how many questions should be generated. The program will then randomly generate questions with two fractions (neither of which will have denominator greater than 25) and an operator. 
 

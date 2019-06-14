@@ -72,7 +72,7 @@ bool getInput(int &size)
 //template <typename D>
 //void perform(int size)
 //{
-//    smartArray<D> list(size);
+//    smart_array<D> list(size);
 //    generate(list);
 //    display("Unsorted:", list);
 //    list.sort();
@@ -80,13 +80,13 @@ bool getInput(int &size)
 //}
 
 
-//void generate(smartArray &list)
+//void generate(smart_array &list)
 //{
 //    for(int i = 0; i < list.size(); ++i)
 //        list[i] = rand()%1000;
 //}
 
-//void display(string title, const smartArray &list)
+//void display(string title, const smart_array &list)
 //{
 //    cout<<endl<<title<<":"<<endl;
 //    for(int i = 0; i < list.size(); ++i)

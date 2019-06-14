@@ -7,7 +7,8 @@
  */
 
 #include <iostream>
-#include "Stack/driver.h"
+#include "stack/driver.h"
+#include "fraction_quiz/driver.h"
 
 int main(int argc, char ** argv) {
 
@@ -17,7 +18,8 @@ int main(int argc, char ** argv) {
   bool menu = true;
   while (menu) {
     std::cout << "Choose a program to run (Press enter to exit): \n\n"
-              << "(1) Palindrome Checker (w/ Stacks)\n";
+              << "(1) Palindrome Checker (w/ Stacks)\n"
+              << "(2) Fraction Quiz (w/ Fraction class)\n";
 
     int user_choice = getchar();
     fflush(stdin);
@@ -26,13 +28,15 @@ int main(int argc, char ** argv) {
       case '1':
         PalindromeChecker();
         break;
+      case '2':
+        PlayFractionQuiz();
+        break;
       case 10:
         menu = false;
         break;
       default:
         std::cout << "Invalid selection.\n";
     }
-;
   }
 
 }

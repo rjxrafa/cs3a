@@ -24,13 +24,13 @@ public:
 
     void resize(int i = 10);
     void sort();
-    //smartArray slice(int begin, int end, int inc = 1);
+    //smart_array slice(int begin, int end, int inc = 1);
 
 //    friend
-//    std::ostream& operator<<( std::ostream& out, const smartArray &array);
+//    std::ostream& operator<<( std::ostream& out, const smart_array &array);
 //
 //    friend
-//    std::istream& operator>>( std::istream& , const smartArray &);
+//    std::istream& operator>>( std::istream& , const smart_array &);
 
 private:
     int mySize;
@@ -120,7 +120,7 @@ void smartArray<D>::sort()
             }
 }
 
-//smartArray slice(int begin, int end, int inc = 1);
+//smart_array slice(int begin, int end, int inc = 1);
 
 template<typename D>
 void smartArray<D>::copy(const smartArray<D> &other)
@@ -156,6 +156,6 @@ std::ostream& operator<<( std::ostream& out, const smartArray &array)
 
 //
 //friend
-//std::istream& operator>>( std::istream& , const smartArray &);
+//std::istream& operator>>( std::istream& , const smart_array &);
 
 #endif // SMARTARRAY_H

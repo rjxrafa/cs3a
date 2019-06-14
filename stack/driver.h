@@ -7,9 +7,8 @@ bool Palindrome(const std::string &line);
 
 /**
  * This is the driver function for testing the Stack implementation.
- * @return 0 upon success.
  */
-int PalindromeChecker() {
+void PalindromeChecker() {
   std::string line, toCheck, is_not;
   try {
     while(GetInput(line)) {
@@ -20,14 +19,13 @@ int PalindromeChecker() {
   }
   catch (cs3a::MY_STACK_ERRORS e) {
     switch(e) {
-      case cs3a::MY_STACK_ERRORS::STACK_EMPTY    : std::cout<<"Stack empty error occurred\n";
+      case cs3a::MY_STACK_ERRORS::STACK_EMPTY    : std::cout<<"stack empty error occurred\n";
         break;
-      case cs3a::MY_STACK_ERRORS::STACK_FULL     : std::cout<<"Stack full error occurred\n";
+      case cs3a::MY_STACK_ERRORS::STACK_FULL     : std::cout<<"stack full error occurred\n";
         break;
-      case cs3a::MY_STACK_ERRORS::STACK_BAD_SIZE : std::cout<<"Stack size error occurred\n";
+      case cs3a::MY_STACK_ERRORS::STACK_BAD_SIZE : std::cout<<"stack size error occurred\n";
     }
   }
-  return 0;
 }
 
 bool GetInput(std::string &line) {

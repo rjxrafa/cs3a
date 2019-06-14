@@ -19,7 +19,7 @@ enum class MY_STACK_ERRORS {STACK_EMPTY, STACK_FULL, STACK_BAD_SIZE};
 template<typename Data>
 class Stack {
  public:
-  Stack(size_t size = 10); // Stack uses a default size of 10
+  explicit Stack(size_t size = 10); // stack uses a default size of 10
   ~Stack();
   Stack(const Stack<Data> &other);
   Stack<Data>& operator=(const Stack<Data> &other);
@@ -165,16 +165,16 @@ void Stack<Data>::Clear() {
 template<typename D>
 std::ostream& operator<<(std::ostream& out, const Stack<D> &stack) {
   if(&out == &std::cout) {
-    out<<"Stack capacity: "<< stack.capacity_<< "\n";
+    out<<"stack capacity: "<< stack.capacity_<< "\n";
     if(stack.empty())
-      out<< "The Stack is empty.\n";
+      out<< "The stack is empty.\n";
     else
       for(int i = stack.top_of_stack_; i > -1; --i)
-        out<<"Stack["<<i<<"] = "<< stack.stack_[i]<< "\n";
+        out<<"stack["<<i<<"] = "<< stack.stack_[i]<< "\n";
   }
   else {
-    out<<"Stack capacity: "<< stack.capacity_
-       <<"\nTop of Stack: "<< stack.top_of_stack_<<"\n";
+    out<<"stack capacity: "<< stack.capacity_
+       <<"\nTop of stack: "<< stack.top_of_stack_<<"\n";
     for(int i =  stack.top_of_stack_; i > -1; --i)
       out<< stack.stack_[i]<<"\n";
   }  return out;
@@ -185,7 +185,7 @@ std::istream& operator>>(std::istream& in, Stack<D> &stack) {
   size_t capacity;
   D value;
   if(&in == &std::cin) {
-    std::cout << "New Stack capacity? " << std::endl;
+    std::cout << "New stack capacity? " << std::endl;
     in >> capacity;
     stack.Resize(capacity);
     while(in >> value)

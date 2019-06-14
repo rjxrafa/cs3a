@@ -3,16 +3,13 @@ project(cs3a)
 
 set (CMAKE_CXX_STANDARD 11)
 
-include_directories(Stack)
+file(GLOB SOURCES *.cpp
+                  fraction_quiz/*.cpp)
 
-set (SOURCES main.cpp)
-
-set (INCLUDE Stack/stack.h
-             Stack/driver.h)
+file(GLOB INCLUDE fraction_quiz/*.h)
 
 if(MINGW)
     set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} -static-libstdc++)
 endif()
 
-add_executable(cs3a ${SOURCES}
-                    ${INCLUDE})
+add_executable(cs3a ${SOURCES} ${INCLUDE})

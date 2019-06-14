@@ -10,4 +10,4 @@ The course stresses the following objectives (taken directly from the syllabus):
 - Demonstrate an understanding of C++ file processing in file manipulation.
 - Demonstrate a competency in doing modular, structured, and object oriented programming techniques. Demonstrate a level of proficiency documenting internal program statements, external program descriptions, and documentation in the use and operation of the C++ program.
 
-The assignments themselves have been modified slightly from their original submission state for readability and posterity. 
+The assignments themselves have been modified slightly from their original submission state for readability and posterity. Implementations have also been modified with portability in mind. As such, CMake files have been provided and external dependencies between operating systems and their respective libraries are kept to a minimum.

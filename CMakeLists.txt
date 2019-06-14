@@ -3,8 +3,6 @@ project(cs3a)
 
 set (CMAKE_CXX_STANDARD 11)
 
-find_package(Curses REQUIRED)
-
 include_directories(Stack)
 
 set (SOURCES main.cpp)
@@ -18,5 +16,3 @@ endif()
 
 add_executable(cs3a ${SOURCES}
                     ${INCLUDE})
-
-target_link_libraries(cs3a ${CURSES_LIBRARIES})

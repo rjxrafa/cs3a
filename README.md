@@ -9,3 +9,5 @@ The course stresses the following objectives (taken directly from the syllabus):
 - Demonstrate proper use of C++'s unique I/O functions.
 - Demonstrate an understanding of C++ file processing in file manipulation.
 - Demonstrate a competency in doing modular, structured, and object oriented programming techniques. Demonstrate a level of proficiency documenting internal program statements, external program descriptions, and documentation in the use and operation of the C++ program.
+
+The assignments themselves have been modified slightly from their original submission state for readability and posterity. 

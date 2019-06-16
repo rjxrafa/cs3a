@@ -10,6 +10,7 @@
 #include "stack/driver.h"
 #include "fraction_quiz/driver.h"
 #include "copy/driver.h"
+#include "statistics/driver.h"
 
 int main(int argc, char ** argv) {
 
@@ -21,7 +22,8 @@ int main(int argc, char ** argv) {
     std::cout << "\nChoose a program to run (Enter 0 to exit): \n\n"
               << "(1) Palindrome Checker (w/ Stacks)\n"
               << "(2) Fraction Quiz (w/ Fraction class)\n"
-              << "(3) File Copier (w/ Command line arguments)\n";
+              << "(3) File Copier (w/ Command line arguments)\n"
+              << "(4) Statistics (w/ Pointers)\n";
 
     int user_choice = getchar();
     fflush(stdin);
@@ -35,6 +37,9 @@ int main(int argc, char ** argv) {
         break;
       case '3':
         CopyDriver(argc, argv);
+        break;
+      case '4':
+        StatisticsDriver();
         break;
       case '0':
         menu = false;

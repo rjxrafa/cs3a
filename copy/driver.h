@@ -8,7 +8,7 @@ void CopyDriver(int argc, char* argv[]) {
       printf("\n\nWelcome to the file copy program. Enter command line arguments as follows: \n"
              "/o=peace.txt /i=war.txt\n"
              "/o - represents your output file\n"
-             "/i - represents your inpout file\n"
+             "/i - represents your input file\n"
              "/e - overwrite flag\n"
              "/a - append flag\n");
       printf("Enter command line arguments: \n");

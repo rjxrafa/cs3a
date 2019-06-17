@@ -136,11 +136,7 @@ std::istream& operator>>(std::istream& in, term& t)
         bool cinflag = true;
 
         if (in>>t.coeff)
-<<<<<<< HEAD
-            cinflag = false;
-=======
             cinflag = false; // this sets a flag for variable to know if there is a coefficient
->>>>>>> ea7174128e6cbdb3e0eb3c4c9587534b4efa90ad
 
         t.power = 0;
 
@@ -153,10 +149,7 @@ std::istream& operator>>(std::istream& in, term& t)
 
         if(in.peek() == '^') // only execute when carat exists
             in>>junk>>t.power;
-<<<<<<< HEAD
-=======
 //            std::cout<<"Hit End of File"<<std::endl;
->>>>>>> ea7174128e6cbdb3e0eb3c4c9587534b4efa90ad
     }
     return in;
 }

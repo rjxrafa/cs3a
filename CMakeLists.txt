@@ -18,4 +18,4 @@ if(MINGW)
     set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} -static-libstdc++)
 endif()
 
-add_executable(cs3a ${SOURCES} ${INCLUDE} statistics/driver.h statistics/statistics.h number_generator/phone_number_generator.h)
+add_executable(cs3a ${SOURCES} ${INCLUDE} statistics/driver.h statistics/statistics.h number_generator/phone_number_generator.h function_pointers/fptr.cpp 2d_array/dynamic_array.cpp 2d_array/modify_array.cpp)
